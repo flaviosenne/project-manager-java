@@ -1,12 +1,12 @@
 package com.project.manager.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+
+
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -20,23 +20,15 @@ public class ParticipantsProject {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonProperty(value = "projects")
-    @Column(name = "project_id")
-    private Integer projectId;
-
-    @JsonProperty(value = "users")
-    @Column(name = "user_id")
-    private Integer userId;
-
-    @OneToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
-    @JsonBackReference(value = "projects")
-    private Project project;
+    private List<Project> project;
 
-    @OneToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonProperty(value = "users")
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @JsonBackReference(value = "users")
-    private User user;
+    private List<User> user;
+
+ 
 }

@@ -1,14 +1,16 @@
 package com.project.manager.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,9 +32,11 @@ public class Project {
 
     @JsonProperty(value = "dateStart")
     @Column(name = "date_start")
+    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     private Date dateStart;
-
+    
     @JsonProperty(value = "dateEnd")
+    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     @Column(name = "date_end")
     private Date dateEnd;
 
@@ -40,8 +44,5 @@ public class Project {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonProperty(value = "users")
-    @JsonManagedReference(value = "users")
-    private List<User> users;
+  
 }
