@@ -9,7 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 
 @AllArgsConstructor
@@ -33,12 +34,12 @@ public class Project {
     @JsonProperty(value = "dateStart")
     @Column(name = "date_start")
     @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-    private Date dateStart;
+    private LocalDate dateStart;
     
     @JsonProperty(value = "dateEnd")
     @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     @Column(name = "date_end")
-    private Date dateEnd;
+    private LocalDate dateEnd;
 
     @JsonProperty(value = "status")
     @Column(name = "status")
