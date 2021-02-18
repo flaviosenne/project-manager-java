@@ -21,4 +21,9 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
+    public User saveUser(User user){      
+        
+        return this.userRepository.save(user);
+    }
+
 }

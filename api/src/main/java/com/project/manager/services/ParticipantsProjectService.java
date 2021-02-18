@@ -4,10 +4,11 @@ import com.project.manager.domain.ParticipantsProject;
 import com.project.manager.domain.Project;
 import com.project.manager.domain.User;
 import com.project.manager.repositories.ParticipantsProjectRepository;
+import com.project.manager.repositories.ProjectRepository;
+import com.project.manager.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import javax.transaction.Transactional;
 public class ParticipantsProjectService {
 
     private final ParticipantsProjectRepository participantsProjectRepository;
+    private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
     public List<ParticipantsProject> findAll(){
         return this.participantsProjectRepository.findAll();
     }
@@ -26,18 +29,25 @@ public class ParticipantsProjectService {
     @Transactional
     public ParticipantsProject create(ParticipantsProject participants){
 
-        List<Project> listProjects = new ArrayList<>();
+        List<Project> listProject = new ArrayList<>();
         for(Project project: participants.getProject()){
             
-            listProjects.add(project);
+            Project projectSaved =  this.projectRepository.save(project);
+            
+            listProject.add(projectSaved);
+            
         }
-        List<User> listUsers = new ArrayList<>();
-        for(User user: participants.getUser()){    
-            listUsers.add(user);
-        }  
+ 
+        List<User> listUser = new ArrayList<>();
+        for(User user: participants.getUser()){ 
+            
+            User userSaved =  this.userRepository.save(user);
 
-        participants.setProject(listProjects);
-        participants.setUser(listUsers);
+            listUser.add(userSaved);
+           
+        }  
+        participants.setProject(listProject);
+        participants.setUser(listUser);
         return this.participantsProjectRepository.save(participants);
     }
 }

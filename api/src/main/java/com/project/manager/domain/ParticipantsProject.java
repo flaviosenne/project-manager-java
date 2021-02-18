@@ -20,14 +20,12 @@ public class ParticipantsProject {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @JsonProperty("projects")
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonProperty(value = "projects")
-    @JoinColumn(name = "project_id", referencedColumnName = "id")
     private List<Project> project;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JsonProperty(value = "users")
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonProperty("users")
     private List<User> user;
 
  
