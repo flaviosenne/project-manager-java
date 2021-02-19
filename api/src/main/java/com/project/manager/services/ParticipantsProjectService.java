@@ -52,4 +52,8 @@ public class ParticipantsProjectService {
         participants.setUser(listUser);
         return this.participantsProjectRepository.save(participants);
     }
+
+    public List<ParticipantsProject> listAllUserByIdProject(Long id){
+        return this.participantsProjectRepository.findAllUsersByIdProject(id);
+    }
 }

@@ -5,6 +5,7 @@ import com.project.manager.services.ParticipantsProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,10 @@ public class ParticipantsProjectController {
     @GetMapping
     public ResponseEntity<List<ParticipantsProject>> getAll(){
         return ResponseEntity.status(200).body(this.participantsProjectService.findAll());
+    }
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<List<ParticipantsProject>> getAllProjectsByIdUser(@PathVariable Long id){
+        return ResponseEntity.status(200).body(this.participantsProjectService.listAllUserByIdProject(id));
     }
 
     @PostMapping
