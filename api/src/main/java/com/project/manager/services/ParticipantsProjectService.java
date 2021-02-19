@@ -34,6 +34,7 @@ public class ParticipantsProjectService {
             
             Project projectSaved =  this.projectRepository.save(project);
             
+            project.setParticipants(participants);
             listProject.add(projectSaved);
             
         }
@@ -41,6 +42,7 @@ public class ParticipantsProjectService {
         List<User> listUser = new ArrayList<>();
         for(User user: participants.getUser()){ 
             
+            user.setParticipants(participants);
             User userSaved =  this.userRepository.save(user);
 
             listUser.add(userSaved);

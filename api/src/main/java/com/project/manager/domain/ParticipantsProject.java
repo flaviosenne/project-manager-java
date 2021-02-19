@@ -1,5 +1,6 @@
 package com.project.manager.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,12 +21,14 @@ public class ParticipantsProject {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @OneToMany(mappedBy = "participants", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonProperty("projects")
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonManagedReference("projects")
     private List<Project> project;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "participants", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonProperty("users")
+    @JsonManagedReference("users")
     private List<User> user;
 
  

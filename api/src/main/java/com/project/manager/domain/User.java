@@ -1,5 +1,6 @@
 package com.project.manager.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -25,6 +26,11 @@ public class User {
     @JsonProperty("email")
     @Column(name = "email")
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name ="participants_id", referencedColumnName = "id")
+    @JsonBackReference(value = "users")
+    private ParticipantsProject participants;
 
 
 }

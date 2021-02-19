@@ -1,5 +1,6 @@
 package com.project.manager.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -46,5 +47,9 @@ public class Project {
     @Column(name = "status")
     private String status;
 
+    @ManyToOne
+    @JoinColumn(name ="participants_id", referencedColumnName = "id")
+    @JsonBackReference(value = "projects")
+    private ParticipantsProject participants;
   
 }
