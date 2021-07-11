@@ -13,11 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 @Table(name = "users")
 public class User {
 
     @JsonProperty("id")
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @JsonProperty("name")
@@ -27,6 +28,10 @@ public class User {
     @JsonProperty("email")
     @Column(name = "email")
     private String email;
+
+    @JsonProperty("password")
+    @Column(name = "password")
+    private String password;
 
     @JsonProperty("phone")
     @Column(name = "phone")
