@@ -18,4 +18,11 @@ public class UserService {
 
         return ResponseEntity.status(201).body(new UserDto().fromDto(userSaved));
     }
+
+    public UserDto findUser(Integer id){
+        User userDB = userRepository.findById(id)
+                .orElseThrow(() -> new Error("usuario não encontrado"));
+
+        return new UserDto().fromDto(userDB);
+    }
 }
