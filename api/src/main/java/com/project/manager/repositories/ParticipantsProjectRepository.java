@@ -11,12 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ParticipantsProjectRepository extends JpaRepository<ParticipantsProject, Integer> {
 
-    @Query(value = "Select new com.project.manager.domain.BIByParticipantsProject(User.name)" +
-    "from ParticipantsProject "+
-    "inner join User "+
-    "on User.participants_id = ParticipantsProject.id "+
-    "inner join Project "+
-    "on Project.participants_id = ParticipantsProject.id "+
-    "where User.id = ?1")
+    @Query(value = "select p from ParticipantsProject p " +
+    " where p.user.id = :id ")
     List<ParticipantsProject> findAllUsersByIdProject(Long id); 
 }

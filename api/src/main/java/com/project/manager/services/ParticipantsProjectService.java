@@ -27,29 +27,8 @@ public class ParticipantsProjectService {
     }
 
     @Transactional
-    public ParticipantsProject create(ParticipantsProject participants){
+    public ParticipantsProject save(ParticipantsProject participants){
 
-        List<Project> listProject = new ArrayList<>();
-        for(Project project: participants.getProject()){
-            
-            Project projectSaved =  this.projectRepository.save(project);
-            
-            project.setParticipants(participants);
-            listProject.add(projectSaved);
-            
-        }
- 
-        List<User> listUser = new ArrayList<>();
-        for(User user: participants.getUser()){ 
-            
-            user.setParticipants(participants);
-            User userSaved =  this.userRepository.save(user);
-
-            listUser.add(userSaved);
-           
-        }  
-        participants.setProject(listProject);
-        participants.setUser(listUser);
         return this.participantsProjectRepository.save(participants);
     }
 

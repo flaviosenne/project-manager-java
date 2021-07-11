@@ -1,11 +1,12 @@
 package com.project.manager.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -16,7 +17,7 @@ import javax.persistence.*;
 public class User {
 
     @JsonProperty("id")
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @JsonProperty("name")
@@ -27,10 +28,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name ="participants_id", referencedColumnName = "id")
-    @JsonBackReference(value = "users")
-    private ParticipantsProject participants;
-
+    @JsonProperty("phone")
+    @Column(name = "phone")
+    private String phone;
 
 }

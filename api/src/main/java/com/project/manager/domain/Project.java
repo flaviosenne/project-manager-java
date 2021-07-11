@@ -1,9 +1,7 @@
 package com.project.manager.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,34 +20,32 @@ import java.time.LocalDate;
 @Table(name = "projects")
 public class Project {
     @JsonProperty(value = "id")
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @JsonProperty(value = "title")
     @Column(name = "title")
     private String title;
 
-    @JsonProperty(value = "owner")
-    @Column(name = "owner")
-    Integer owner;
+
+    @JsonProperty(value = "description")
+    @Column(name = "description")
+    private String description;
+
+    @JsonProperty(value = "userLead")
+    @Column(name = "user_lead")
+    private Integer userLead;
 
     @JsonProperty(value = "dateStart")
     @Column(name = "date_start")
-    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     private LocalDate dateStart;
     
     @JsonProperty(value = "dateEnd")
-    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     @Column(name = "date_end")
     private LocalDate dateEnd;
 
     @JsonProperty(value = "status")
     @Column(name = "status")
     private String status;
-
-    @ManyToOne
-    @JoinColumn(name ="participants_id", referencedColumnName = "id")
-    @JsonBackReference(value = "projects")
-    private ParticipantsProject participants;
   
 }

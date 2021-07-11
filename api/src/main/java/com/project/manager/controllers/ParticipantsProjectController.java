@@ -31,6 +31,6 @@ public class ParticipantsProjectController {
 
     @PostMapping
     public ResponseEntity<ParticipantsProject> create(@RequestBody ParticipantsProject participants){
-        return ResponseEntity.status(201).body(this.participantsProjectService.create(participants));
+        return ResponseEntity.status(201).body(this.participantsProjectService.save(participants));
     }
 }
