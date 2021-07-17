@@ -2,16 +2,14 @@ package com.project.manager.requests;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.manager.domain.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class UserDto {
     @JsonProperty(value = "id")
     private Integer id;

@@ -1,5 +1,6 @@
 package com.project.manager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -28,14 +29,14 @@ public class Project {
     @Column(name = "title")
     private String title;
 
-
     @JsonProperty(value = "description")
     @Column(name = "description")
     private String description;
 
+    @OneToOne
     @JsonProperty(value = "userLead")
-    @Column(name = "user_lead")
-    private Integer userLead;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @JsonProperty(value = "dateStart")
     @Column(name = "date_start")
